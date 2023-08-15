@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Laboratorios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Ciudad</th>
+      <th scope="col">País</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for laboratorio in laboratorios %}
+      <tr>
+          <td>{{ laboratorio.nombre }}</td>
+          <td>{{ laboratorio.ciudad }}</td>
+          <td>{{ laboratorio.pais }}</td>
+          <td><a href="{% url 'actualizar_laboratorio' laboratorio_id=laboratorio.id %}">Actualizar</a></td>
+          <td><a href="{% url 'eliminar_laboratorio' laboratorio_id=laboratorio.id %}" onclick="return confirmarEliminacion('{{ laboratorio.nombre }}')">Eliminar</a></td>
+
+
+      </tr>
+       {% endfor %}
+  </tbody>
+</table>
+
+<script>
+    function confirmarEliminacion(nombreLaboratorio) {
+      return confirm('¿Estás seguro de que deseas eliminar el laboratorio ' + nombreLaboratorio + '?');
+        }
+    </script>
+</body>
+</html>
+
